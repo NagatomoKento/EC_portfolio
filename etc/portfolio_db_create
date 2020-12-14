@@ -1,0 +1,184 @@
+mysql -u root -p
+
+DB_NAME:ECweb_db
+USER:EC_user
+PASS:EC_pass
+
+CREATE DATABASE ECweb_db DEFAULT CHARACTER SET utf8;
+grant all privileges on ECweb_db.*to EC_user@'localhost' identified by 'EC_pass' with grant option;
+
+use ECweb_db;
+
+CREATE TABLE member_info (
+  mem_no int unsigned not null auto_increment,
+  password varchar(255) ,
+  family_name varchar(20) not null,
+  first_name varchar(20) not null,
+  family_name_kana varchar(20) not null,
+  first_name_kana varchar(20) not null,
+  sex tinyint(1) unsigned not null,
+  year varchar(4) not null,
+  month varchar(2) not null,
+  day varchar(2) not null,
+  zip1 varchar(3) not null,
+  zip2 varchar(4) not null,
+  address varchar(100) not null,
+  email varchar(255) not null,
+  tel1 varchar(6) not null,
+  tel2 varchar(6) not null,
+  tel3 varchar(6) not null,
+  agree varchar(20) not null,
+  regist_date datetime not null,
+  update_date datetime,
+  delete_date datetime,
+  delete_flg tinyint(1) unsigned not null default 0,
+  login_flg varchar(1) default 0,
+  primary key( mem_no )
+);
+
+CREATE TABLE cart (
+  crt_id int unsigned not null auto_increment,
+  customer_no int unsigned not null,
+  item_id int unsigned not null,
+  num tinyint(1) unsigned not null default 1,
+  regist_date datetime not null,
+  update_date datetime,
+  delete_date datetime,
+  delete_flg tinyint(1) unsigned not null default 0,
+  primary key( crt_id ),
+  index crt_idx( customer_no, delete_flg )
+);
+
+CREATE TABLE category (
+  ctg_id tinyint unsigned not null auto_increment,
+  category_name varchar(100) not null,
+  regist_date varchar(50) not null,
+  update_date datetime,
+  delete_date datetime,
+  delete_flg tinyint(1) unsigned not null default 0,
+  primary key(ctg_id)
+);
+
+INSERT INTO category(ctg_id, category_name, regist_date) VALUES ("7", "乾物", now());
+
+
+CREATE TABLE purchase(
+  purchased_id int unsigned not null auto_increment,
+  purchase_unit varchar(20) not null,
+  customer_no varchar(20) not null,
+  item_id varchar(20) not null,
+  item_name varchar(255) not null,
+  price varchar(20) not null,
+  image varchar(255) not null,
+  image2 varchar(255) ,
+  image3 varchar(255) ,
+  quantity varchar(5) not null,
+  regist_date datetime not null,
+  update_date datetime,
+  delete_date datetime,
+  delete_flg tinyint(1) unsigned not null default 0,
+  primary key( purchased_id )
+);
+
+CREATE TABLE staff (
+  staff_no int unsigned auto_increment,
+  staff_id varchar(3),
+  staff_pass varchar(255),
+  staff_name varchar(100),
+  staff_name_kana varchar(100),
+  regist_date datetime,
+  login_flg tinyint(1) unsigned not null default 0,
+  primary key( staff_no )
+);
+
+INSERT INTO staff(staff_id, staff_pass, staff_name, staff_name_kana, regist_date, login_flg) VALUES ('A01','$2y$10$b9HwLUtsZ5P37vEtYWaxC.TUtgcxkLzYschnM0Y1XfiDvWpCPUBoy','永友健斗','ながともけんと','2020-11-10','1');
+
+
+CREATE TABLE postcode (
+  jis varchar(5),
+  old_zip varchar(5),
+  zip varchar(7),
+  pref_kana varchar(100),
+  city_kana varchar(100),
+  town_kana varchar(100),
+  pref varchar(100),
+  city varchar(100),
+  town varchar(100),
+  comment1 tinyint(1) unsigned,
+  comment2 tinyint(1) unsigned,
+  comment3 tinyint(1) unsigned,
+  comment4 tinyint(1) unsigned,
+  comment5 tinyint(1) unsigned,
+  comment6 tinyint(1) unsigned
+);
+
+LOAD DATA INFILE '/Applications/XAMPP/xamppfiles/htdocs/DT/member/KEN_ALL.CSV' INTO TABLE `postcode` FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
+
+CREATE TABLE news (
+  news_no int auto_increment,
+  release_date date default now(),
+  news varchar(255) default 0,
+  regist_date datetime default now(),
+  primary key(news_no)
+);
+INSERT INTO news(news) VALUES ("おはよう");
+
+CREATE TABLE inquiry (
+  inquiry_no int auto_increment,
+  name varchar(50) default 0,
+  name_kana varchar(50) default 0,
+  corporate varchar(50) default 0,
+  email varchar(100) default 0,
+  subject varchar(100) default 0,
+  contents text default 0,
+  regist_date datetime default now(),
+  primary key(inquiry_no)
+);
+
+
+CREATE TABLE item (
+  item_id int unsigned not null auto_increment,
+  item_name varchar(100) not null,
+  detail text not null,
+  price DECIMAL(10,3) unsigned not null,
+  image varchar(50) not null,
+  image2 varchar(50),
+  image3 varchar(50),
+  ctg_id tinyint unsigned not null,
+  regist_date datetime not null,
+  update_date datetime,
+  delete_date datetime,
+  delete_flg tinyint(1) unsigned not null default 0,
+  primary key( item_id ),
+  index item_idx( ctg_id )
+);
+
+INSERT INTO category (ctg_id, category_name, regist_date)VALUES ( 1, '果物',NOW() );
+INSERT INTO category (ctg_id, category_name, regist_date)VALUES ( 2, '果物',NOW() );
+INSERT INTO category (ctg_id, category_name, regist_date)VALUES ( 3, '牛肉',NOW() );
+INSERT INTO category (ctg_id, category_name, regist_date)VALUES ( 4, '鶏肉',NOW() );
+INSERT INTO category (ctg_id, category_name, regist_date)VALUES ( 5, 'お米',NOW() );
+
+INSERT INTO item (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 1,  'カラーピーマン（500g)', '', 630, 'tamanegi.jpg', 1 , NOW());
+
+INSERT INTO item  (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 2,  'にんじん', '細長い東洋系品種と、太く短い西洋系品種の2種類に大別され、ともに古くから薬や食用としての栽培が行われてきた。', 150, 'ninjin.jpg', 1, NOW());
+
+INSERT INTO item (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 3,  'ピーマン', 'ピーマン自体はトウガラシの品種の一つであり、果実は肉厚でカプサイシンを含まない。', 50, 'pi-man.jpg', 1, NOW());
+
+INSERT INTO item (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 4,  'なす',     '世界の各地で独自の品種が育てられている。加賀茄子などの一部例外もあるが日本においては南方ほど長実または大長実で、北方ほど小実品種となる。', 120, 'nasu.jpg', 1, NOW());
+
+INSERT INTO item (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 5,  'みかん', '日本の代表的な果物で、バナナのように、素手で容易に果皮をむいて食べることができるため、冬になれば炬燵の上にミカンという光景が一般家庭に多く見られる。', 30, 'mikan.jpg', 2, NOW());
+
+INSERT INTO item (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 6,  'りんご', '現在日本で栽培されているものは、明治時代以降に導入されたもの。病害抵抗性、食味、収量などの点から品種改良が加えられる。', 100, 'ringo.jpg', 2, NOW());
+
+INSERT INTO item (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 7,  'ぶどう', '葉は両側に切れ込みのある15 - 20cmほどの大きさで、穂状の花をつける。', 130, 'budou.jpg', 2 , NOW());
+
+INSERT INTO item (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 8,  'いちご', 'イチゴとして流通しているものは、ほぼ全てオランダイチゴである。', 250, 'ichigo.jpg', 2 , NOW());
+
+INSERT INTO item (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 9,  'コーラ',             '複数あるコーラ飲料製造社ではこれらの香味料以外にその会社独自の香味料を加えることで独自の製品として開発している。', 120, 'cola.jpg', 3 , NOW());
+
+INSERT INTO item (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 10, 'カルピス',           '企業としてのカルピスの創業者は、僧侶出身の三島海雲。創業初期は国分グループだった。', 120, 'karupisu.jpg', 3 , NOW());
+
+INSERT INTO item (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 11, 'ウーロン茶',         '烏龍茶（ウーロンちゃ）は、中国茶のうち青茶（せいちゃ、あおちゃ）と分類され、茶葉を発酵途中で加熱して発酵を止め、半発酵させた茶である。', 110, 'u-rontya.jpg', 3 , NOW());
+
+INSERT INTO item (item_id, item_name, detail, price, image, ctg_id, regist_date) VALUES ( 12, 'ミネラルウォーター', 'ミネラルウォーター（Mineral water）とは、容器入り飲料水のうち、地下水を原水とするものを言う。', 100, 'water.jpg', 3 , NOW());

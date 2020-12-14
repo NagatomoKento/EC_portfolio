@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link href="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+      {% include 'header_login_top.html.twig' %}
+</header>
+
+<div class = "page_body">
+    <div id="cart_list">
+      {% if dataArr | length == 0 %}
+      <p>カートに商品は入っていません</p>
+      <a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}item_list.php">商品一覧へ戻る</a>
+
+      {% else %}
+      <p>ショッピングカート</p>
+      <a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}item_list.php">商品一覧へ戻る</a>
+      <p>カート内商品数：{{sumNum}}個</p>
+    </div>
+
+      <div class="item">
+      {% for value in dataArr %}
+        <ul>
+          <li class="image">
+          <img class = "detail_image" src="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}images/{{value.image}}" alt="{{value.item_name}}"></li>
+
+          <li class="name">{{value.item_name}}</li>
+
+          <li class="price">&yen;{{value.price|number_format(0, '.', ',')}} × {{value.NUM}}個</li>
+
+          <li class="price">小計 &yen;{{value.price * value.NUM|number_format(0, '.', ',')}}</li>
+
+          <li class="num_change">
+          <form method="post" action = "{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}cart.php?item_id={{value.item_id}}">
+          <input type="submit" neme="num_change" value="数量を増やす" >
+          </form>
+          <form method="post" action = "{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}cart.php?reduce={{value.item_id}}">
+          <input type="submit" neme="num_change" value="数量を減らす" >
+          </form>
+          </li>
+
+        </ul>
+      {% endfor %}
+      </div>
+
+    <div>
+      <form method="post" action = "{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}shop_confirm.php">
+      <input type="submit" value="購入確認へ">
+      </form>
+        {% endif %}
+    </div>
+</div>
+
+<div>
+    {% include 'footer.html.twig' %}
+</div>
+
+</body>
+</html>

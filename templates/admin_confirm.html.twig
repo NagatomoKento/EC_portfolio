@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <link href="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}css/style.css" rel="stylesheet">
+  </head>
+
+
+  <body>
+    <form method="post" action="admin_confirm.php">
+    <div id = "page_body">
+        <div id="item_name">
+          <dl>商品名</dl><br>
+          <dd>{{dataArr.item_name}}</dd>
+        </div>
+
+        <div id="detail">
+          <dl>商品詳細</dl><br>
+          <dd>{{dataArr.detail}}</dd>
+        </div>
+
+        <div id="price">
+          <dl>価格</dl><br>
+          <dd>{{dataArr.price}}円</dd>
+        </div>
+
+        <div id="image">
+            <dl>画像</dl><br>
+            <dd>ファイル名:{{dataArr.image}}</dd>
+        </div><br>
+        <div id="ctg_id">
+          カテゴリーNo.{{dataArr.ctg_id}}
+        </div>
+
+        <div>
+
+          {% for key, value in dataArr %}
+          <input type="hidden" name="{{key}}" value="{{value}}">
+          {% endfor %}
+          <input type="submit" name="back" value="戻る">
+          <input type="submit" name="complete" value="アップロード">
+        </div>
+      </form>
+</div>
+
+  </body>
+</html>

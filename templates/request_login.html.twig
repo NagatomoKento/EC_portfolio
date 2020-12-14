@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <link href="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      {% include 'header_unlogin_top.html.twig' %}
+    </header>
+    
+    <div class = "page_body">
+
+      <div>
+        <span>これより先は<a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_LOGIN')}}login.php">ログイン</a>が必要です。</span>
+      </div>
+
+      <div>
+        <span>初めてご利用の方は</span>
+        <span><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_MEMBER')}}regist.php">こちら</a>（新規会員登録）</span>
+      </div>
+    
+    </div>
+
+    <div>
+    {% include 'footer.html.twig' %}
+    </div>
+  </body>
+</html>

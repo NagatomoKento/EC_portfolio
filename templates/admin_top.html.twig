@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>楽園農園管理</title>
+      <link href="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div>
+    こんにちは！<br>
+    こちらは南国農園サイトの管理画面です。
+    </div>
+
+    <div>
+        <ul>
+          <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_ADMIN')}}admin_item.php">商品一覧照会・修正</a></li>
+
+          <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_ADMIN')}}admin_item_add.php">商品追加</a></li>
+
+          <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_ADMIN')}}admin_mem_list.php">会員情報照会</a></li>
+
+          <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_ADMIN')}}admin_news.php">お知らせ（ニュース）管理</a></li>
+
+          <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_ADMIN')}}admin_sales.php">売上照会</a></li>
+
+          <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_ADMIN')}}admin_logout.php">ログアウト</a></li>
+        </ul>
+      </div>
+  </body>
+</html>

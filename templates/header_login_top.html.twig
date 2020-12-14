@@ -1,0 +1,16 @@
+
+<html lang="ja">
+<meta charset ="utf-8">
+
+  {# ログイン 共通部分 header #}
+  <div class = "top">
+      <h1><a href = "{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}item_list.php"><img src="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}img/logo.png" alt="logo画像"></a></h1>
+      
+      <div id= "header_person">こんにちは、<a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}mypage.php">{{session.family_name}}{{session.first_name}}</a>様</div>
+  </div>
+      
+      <nav id="groval_navi">
+        <ul>
+          <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_LOGIN')}}logout.php">ログアウト</a></li></li><li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}inquiry_form.php">お問合せ</a></li><li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}mypage.php">マイページ</a></li><li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}cart.php">カート</a></li><li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}item_list.php">トップ</a>
+        </ul>
+      </nav>

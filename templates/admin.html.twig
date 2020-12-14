@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>スタッフログイン</title>
+    <link href="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}css/style.css" rel="stylesheet">
+</head>
+<body>
+  <form method="post" action="admin.php">
+    <table>
+      <tr>
+      <th>スタッフID<span class ="red">*</span></th>
+      <td>
+        <input type="text" name="staff_id" value="{{dataArr.email}}" size="20">
+      </td>
+    </tr>
+
+    <tr>
+      <th>パスワード<span class="red">*</span></th> 
+      <td>
+        <input type ="password" name="staff_pass" value="{{dataArr.staff_pass}}">
+         {% if dataArr.loginflg != true %}<br>
+         <span class="red">{{ dataArr.errmsg }}</span>
+         {% endif %}
+      </td>
+    </tr>
+    </table>
+
+    <div>
+      <input type="submit" name="login" value="ログイン">
+    </div>
+
+  </form>
+</body>
+</html>

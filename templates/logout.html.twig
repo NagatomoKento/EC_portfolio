@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}css/style.css" rel="stylesheet">
+  </head>
+  
+  <body>
+    <header>
+        {% include 'header_login_top.html.twig' %}
+    </header>
+
+    <div class = "page_body">
+      <div>
+        ログアウトしますか？
+      </div>
+
+      <form method = "post" action = "logout.php">
+      <input type="submit" name="logout" value="ログアウト">
+      </form>
+    </div>
+
+    <div>
+      {% include 'footer.html.twig' %}
+    </div>
+  </body>
+</html>

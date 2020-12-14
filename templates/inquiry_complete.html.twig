@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}css/style.css" rel="stylesheet">
+  <title>会員登録完了</title>
+</head>
+
+<body>
+<header>
+    {% include 'header_common.html.twig' %}
+</header>
+
+  <div class = "page_body">
+    <div>お問い合わせが完了しました</div>
+    <div><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}item_list.php">TOPページへ</a></div>
+  </div>
+
+<div>
+  {% include 'footer.html.twig' %}
+</div>
+
+</body>
+</html>

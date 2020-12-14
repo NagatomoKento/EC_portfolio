@@ -1,0 +1,16 @@
+
+<html lang="ja">
+<meta charset ="utf-8">
+
+{# 非ログイン/ログイン 共通部分 category_menu #}
+  <div id = "category_menu">
+    <section id = "side_category">
+      <div>カテゴリー</div>
+      <ul>
+        <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}item_list.php">全て</a></li>
+        {% for value in cateArr %}
+        <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}item_list.php?ctg_id={{value.ctg_id}}">{{value.category_name}}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>

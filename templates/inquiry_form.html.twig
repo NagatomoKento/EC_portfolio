@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}css/style.css" rel="stylesheet">
+
+    <title>お問い合わせ</title>
+  </head>
+
+  <header>
+  {% include 'header_common.html.twig' %}
+  </header>
+
+  <body>
+    <div class = "page_body">
+      <form method="post" action="inquiry_complete.php">
+        <div id="name">
+          <label for="name">お名前<span class="red">*</span></label><br>
+          <input type ="text" name="name" value="{{inquiryArr.name}}">
+          {% if errArr.name | length >0 %}<br><span class="red">{{errArr.name}}</span>{% endif %}  
+        </div>
+
+        <div id="name_kana">
+          <label for="name_kana">お名前（かな）</label><br>
+          <input type ="text" name="name_kana" value="{{inquiryArr.name_kana}}">
+        </div>
+
+        <div id="corporate">
+          <label for="corporate">（法人の場合）会社名</label><br>
+          <input type ="text" name="corporate" value="{{inquiryArr.corporate}}">
+          {% if errArr.corporate| length >0 %}<br><span class="red">{{errArr.name_kana}}</span>{% endif %}
+        </div>
+
+        <div id="email">
+          <label for="email">メールアドレス<span class ="red">*</span></label><br>
+          <input type="text" name="email" value="{{dataArr.email}}" size="40">
+          {% if errArr.email | length > 0 %}<br><span class="red">{{errArr.email}}</span>{% endif %}
+        </div>
+
+        <div id="subject">
+          <label for="subject">件名（出店や商品に関してなど）<span class ="red">*</span></label><br>
+          <input type="text" name="subject" value="{{inquiryArr.subject}}" size="40">
+          {% if errArr.subject | length > 0 %}<br><span class="red">{{errArr.subject}}</span>{% endif %}
+        </div>
+
+        <div id="contents">
+          <label for= "contents">お問い合わせ内容<span class ="red">*</span></label><br>
+          <textarea  name="contents" value="{{inquiryArr.contents}}" cols="40" rows="8"></textarea>
+          {% if errArr.contents | length > 0 %}<br><span class="red">{{errArr.contents}}</span>{% endif %}
+        </div>
+
+        <div>
+          この内容でお問い合わせしますか？
+        </div>
+
+        <div id="submit">
+          <input type="button" name="back" value="一覧へ戻る" onclick="history.back(); return false;">
+          <input type="submit" name="complete" value="送信">
+        </div>
+      </form>
+    </div>
+
+    <div>
+    {% include 'footer.html.twig' %}
+    </div>
+    
+  </body>
+</html>

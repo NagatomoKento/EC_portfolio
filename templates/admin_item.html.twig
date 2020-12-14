@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <link href="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}css/style.css" rel="stylesheet">
+    <title>商品一覧</title>
+  </head>
+
+  <body>
+  <div id = "admin_wrapper">
+    <div>商品一覧</div>
+
+      {% for value in itemData %}
+      <div class="admin_item_detail">
+        <div class="admin_photo">
+          <ul>
+            <li>
+              <img class="admin_detail_image" src="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}images/{{value.image}}" alt="{{value.item_name}}">
+            </li>
+          </ul>
+        </div>
+
+        <div class="detail">
+          <ul>
+            <li>商品ID :{{value.item_id}}</li>
+          </ul>
+
+          <ul>
+            <li>カテゴリーID :{{value.ctg_id}}</li>
+          </ul>
+
+          <ul>
+            <li>商品名 : {{value.item_name}}</li>
+          </ul>
+
+          <ul>
+            <li>詳細 : {{value.detail}}</li>
+          </ul>
+
+          <ul>
+            <li>価格 : &yen;{{value.price|number_format(0, '.', ',')}}</li>
+          </ul>
+
+          <ul>
+            <li>登録日時 : {{value.regist_date}}</li>
+          </ul>
+
+          <ul>
+            <li><a href ="{{constant('ECweb\\Bootstrap::ENTRY_URL_ADMIN')}}admin_item_update.php?item_id={{value.item_id}}">修正する</a></li>
+          </ul>
+        </div>
+      </table>
+      </div>
+      {% endfor %}
+    
+      <div id="admin_back">
+        <input type="button" name="back" value="戻る" onclick="history.back(); return false;">
+      </div>
+    </div>
+  </body>
+</html>

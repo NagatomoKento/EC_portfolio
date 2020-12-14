@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>ログイン</title>
+      <link href="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      {% include 'header_unlogin_top.html.twig' %}
+    </header>
+
+    <div class = "page_body">
+      <form method="post" action="login.php">
+        <table>
+          <tr>
+            <th>メールアドレス<span class ="red">*</span></th>
+            <td><input type="text" name="email" value="{{dataArr.email}}" size="40"></td>
+          </tr>
+
+          <tr>
+            <th>パスワード<span class="red">*</span></th> 
+            <td><input type ="password" name="password" value="{{dataArr.password}}">
+            {% if dataArr.loginflg != true %}<br>
+            <span class="red">{{ dataArr.errmsg }}</span>
+            {% endif %}
+            </td>
+          </tr>
+        </table>
+
+        <div>
+          <input type="submit" name="login" value="ログイン">
+        </div>
+
+        <div>
+          新規会員登録は<a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_MEMBER')}}regist.php">こちら</a>
+        </div>
+        <br><br>
+
+        <div>
+        <strong>↓会員登録なしでのゲストログインはこちらです。</strong><br>
+          <input type="submit" name="guest_login" value="面接用ゲストログイン">
+        </div>
+
+      </form>
+    </div>
+
+    <div>
+      {% include 'footer.html.twig' %}
+    </div>
+  </body>
+</html>

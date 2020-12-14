@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="{{constant('ECweb\\Bootstrap::ENTRY_URL')}}css/style.css" rel="stylesheet">
+  </head>
+  
+  <body>
+    <header>
+      {% if session.family_name is empty %}
+      {% include 'header_unlogin_top.html.twig' %}
+      {% else %}
+      {% include 'header_login_top.html.twig' %}
+      {% endif %}
+    </header>
+
+    <div class = "page_body">
+    <div>
+    こんにちは！<br>
+    {{ session.family_name }}{{ session.first_name }}様のマイページです。
+    </div>
+
+    <div>
+        <ul>
+          <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}purchase_history.php">購入履歴</a></li>
+
+          <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_MEMBER')}}mem_info_reference.php">会員情報照会</a></li>
+
+          <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_MEMBER')}}cancel_mem.php">退会</a></li>
+
+          <li><a href="{{constant('ECweb\\Bootstrap::ENTRY_URL_SHOP')}}item_list.php">TOPページへ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      {% include 'footer.html.twig' %}
+    </div>
+
+    </div>
+  </body>
+  </html>
